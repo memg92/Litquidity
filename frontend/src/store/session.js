@@ -16,25 +16,25 @@ export const dropUserSession = () => {
   };
 };
 
-export const loginUser = (credential, password) => {
-  return async function (dispatch) {
-    const response = await fetch("/api/session", {
+export const loginUser = (credential, password) =>
+  async function (dispatch) {
+    const res = await fetch("/api/session", {
       method: "POST",
       body: JSON.stringify({
         credential: credential,
         password: password,
       }),
     });
-    dispatch(setUserSession(response.data.user));
+    dispatch(setUserSession(res.data.user));
+    return res;
   };
-};
 
 const sessionReducer = (state = { user: null }, action) => {
   switch (action.type) {
     case SET_SESSION:
-      return { ...action.user };
+      return { ...state, user: action.user };
     case DROP_SESSION:
-      return { user: null };
+      return { ...state, user: null };
     default:
       return state;
   }

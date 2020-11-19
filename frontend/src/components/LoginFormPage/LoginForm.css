@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+}
+form * {
+  padding: 5px;
+  margin: 3px;
+  border-radius: 3px;
+  border-style: none;
+}
+button {
+  background-color: rgba(255, 173, 65, 0.897);
+  border-radius: 3px;
+}
