@@ -21,10 +21,25 @@ export const loginUser = (credential, password) =>
     const res = await fetch("/api/session", {
       method: "POST",
       body: JSON.stringify({
-        credential: credential,
-        password: password,
+        credential,
+        password,
       }),
     });
+    dispatch(setUserSession(res.data.user));
+    return res;
+  };
+
+export const signUpUser = (username, email, password) =>
+  async function (dispatch) {
+    const res = await fetch("/api/users", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
     dispatch(setUserSession(res.data.user));
     return res;
   };
@@ -32,8 +47,12 @@ export const loginUser = (credential, password) =>
 export const restoreUser = () =>
   async function (dispatch) {
     const res = await fetch("/api/session");
-    dispatch(setUserSession(res.data.user));
-    return res;
+    if (res.data.user) {
+      dispatch(setUserSession(res.data.user));
+      return res;
+    } else {
+      return setUserSession(null);
+    }
   };
 
 const sessionReducer = (state = { user: null }, action) => {
