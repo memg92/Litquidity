@@ -55,6 +55,15 @@ export const restoreUser = () =>
     }
   };
 
+export const logoutUser = () =>
+  async function (dispatch) {
+    const res = await fetch("/api/session", {
+      method: "DELETE",
+    });
+    dispatch(dropUserSession());
+    return res;
+  };
+
 const sessionReducer = (state = { user: null }, action) => {
   switch (action.type) {
     case SET_SESSION:
