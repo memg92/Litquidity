@@ -33,5 +33,11 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  flex-wrap: nowrap;
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  bottom: -110px;
+  right: -15px;
 }
