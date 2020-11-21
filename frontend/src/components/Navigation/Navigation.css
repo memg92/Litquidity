@@ -11,8 +11,6 @@ ul {
 }
 
 li * {
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
   padding: 5px;
 }
@@ -30,13 +28,12 @@ a {
 }
 
 .profile-button-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   position: relative;
 }
 
 .profile-dropdown {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   bottom: -110px;
   right: -15px;

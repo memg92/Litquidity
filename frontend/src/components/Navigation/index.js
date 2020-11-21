@@ -26,7 +26,7 @@ const Navigation = ({ isLoaded }) => {
             Home
           </NavLink>
         </li>
-        <li className="profile-button-container">{isLoaded && sessionLinks}</li>
+        <li>{isLoaded && sessionLinks}</li>
       </ul>
     </nav>
   );
