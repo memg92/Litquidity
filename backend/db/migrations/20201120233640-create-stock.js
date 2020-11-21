@@ -30,7 +30,7 @@ module.exports = {
       portfolioId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: Portfolios },
+        references: { model: "Portfolios" },
         unique: true,
       },
       createdAt: {
