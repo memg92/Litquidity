@@ -1,0 +1,54 @@
+.splash-main-container {
+  position: static;
+  height: 100vh;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  grid-template-areas: "text media";
+  padding: 0 80px;
+  background-color: rgb(195, 245, 60);
+  z-index: 1;
+}
+
+.splash-text-container {
+  grid-area: "text";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 500px;
+  font-family: "Capsule Sans Display", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 500;
+  margin: 0;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.24px;
+}
+
+.splash-media-container {
+  grid-area: "media";
+  max-width: 500px;
+}
+
+.signup-button {
+  background-color: black;
+  padding: 5px;
+  border-radius: 24px;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  max-width: 150px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}

@@ -1,18 +1,43 @@
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 0px 40px;
+}
+
+.navbar-container {
+  position: sticky;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  top: 0;
+  width: 100%;
+}
+
+.main-logo-name {
+  align-self: center;
+  max-width: 100px;
+  font-family: "Capsule Sans Text", sans-serif;
+  font-weight: 500;
+  font-size: 1.5em;
 }
 
 ul {
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  max-width: 200px;
 }
 
 li * {
   box-sizing: border-box;
-  padding: 5px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.sign-up-button {
+  background-color: rgb(0, 200, 5);
+  border-radius: 24px;
 }
 
 a {

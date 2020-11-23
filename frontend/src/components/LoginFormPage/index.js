@@ -23,7 +23,7 @@ const LoginFormPage = () => {
   };
 
   return (
-    <div>
+    <div className="login-form-container">
       <form onSubmit={handleSubmit}>
         <input
           type="email"

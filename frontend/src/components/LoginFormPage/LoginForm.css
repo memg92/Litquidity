@@ -1,3 +1,11 @@
+.login-form-container {
+  position: absolute;
+  display: flex;
+  top: 50vh;
+  justify-content: center;
+  width: 100%;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -10,12 +18,12 @@ form input {
   margin: 3px;
   border-radius: 3px;
   border-style: none;
-  background-color: rgb(215, 237, 245);
+  background-color: rgb(245, 248, 250);
 }
 button {
   box-sizing: border-box;
   margin-top: 3px;
   padding: 5px;
-  background-color: rgba(255, 173, 65, 0.897);
+  background-color: rgba(0, 200, 5, 0.75);
   border-radius: 3px;
 }

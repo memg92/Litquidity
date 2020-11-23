@@ -1,0 +1,7 @@
+.signup-form-container {
+  position: absolute;
+  display: flex;
+  top: 50vh;
+  justify-content: center;
+  width: 100%;
+}

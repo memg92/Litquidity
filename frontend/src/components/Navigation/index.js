@@ -13,22 +13,29 @@ const Navigation = ({ isLoaded }) => {
     sessionLinks = (
       <>
         <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink className="sign-up-button" to="/signup">
+          Sign Up
+        </NavLink>
       </>
     );
   }
 
   return (
-    <nav>
-      <ul>
-        <li>
+    <div className="navbar-container">
+      <nav>
+        <NavLink to="/" className="main-logo-name">
+          Litquidity
+        </NavLink>
+        <ul>
+          {/* <li>
           <NavLink exact to="/">
             Home
           </NavLink>
-        </li>
-        <li>{isLoaded && sessionLinks}</li>
-      </ul>
-    </nav>
+        </li> */}
+          <li>{isLoaded && sessionLinks}</li>
+        </ul>
+      </nav>
+    </div>
   );
 };
 
