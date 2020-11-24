@@ -50,16 +50,27 @@ a {
   margin: 0px;
   border: none;
   font-size: 20px;
+  padding: 0;
 }
 
 .profile-button-container {
   position: relative;
+  padding: 0;
 }
 
 .profile-dropdown {
   display: flex;
   flex-direction: column;
   position: absolute;
-  bottom: -110px;
+  align-items: flex-start;
+  bottom: -155px;
   right: -15px;
+  background-color: whitesmoke;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.logout-button-container {
+  display: flex;
+  align-self: center;
 }

@@ -15,8 +15,25 @@ const SplashPage = () => {
         </NavLink>
       </div>
       <div className="splash-media-container">
-        <img src="../../../../public/assets/splash-phone.png"></img>
+        <video
+          src="/assets/looping-app-video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          draggable="false"
+          controlsList="nodownload nofullscreen noremoteplayback"
+          className="splash-phone-video"
+        ></video>
+
+        <img
+          src="/assets/splash-img.png"
+          className="splash-phone-img"
+          alt="phone-img"
+        ></img>
       </div>
+      <footer></footer>
     </div>
   );
 };
