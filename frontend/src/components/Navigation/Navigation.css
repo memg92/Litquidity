@@ -93,10 +93,16 @@ a {
 }
 
 .search-bar-container > form {
-  display: inline;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 }
-
+.search-bar {
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+}
 .unauthed-nav-container {
   grid-column-start: 3;
   justify-self: flex-end;

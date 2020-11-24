@@ -13,7 +13,7 @@ const router = express.Router();
 //   handleValidationErrors,
 // ];
 
-const baseUrl = "https://sandbox.iexapis.com/stable";
+const baseUrl = "https://sandbox.iexapis.com/stable/stock";
 const apiTestKey = process.env.API_TEST_KEY;
 
 /******************** Stock routes ********************/
@@ -23,7 +23,18 @@ router.post(
   "/",
   asyncHandler(async (req, res, next) => {
     const { searchInput: symbolQuery } = req.body;
-    const url = `${baseUrl}/stock/${symbolQuery}/quote?token=${apiTestKey}`;
+    console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
+
+    let url;
+    if (symbolQuery.length > 5) {
+      let symbolsString = symbolQuery;
+      if (Array.isArray(symbolQuery)) {
+        symbolsString = symbolQuery.join();
+      }
+      url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiTestKey}`;
+    } else {
+      url = `${baseUrl}/${symbolQuery}/quote?token=${apiTestKey}`;
+    }
 
     const stockData = await fetch(url);
 

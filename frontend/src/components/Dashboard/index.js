@@ -1,5 +1,20 @@
+import { getIndexData } from "../../store/indices";
+import { useDispatch } from "react-redux";
+import SP500 from "./SP500";
+
 const Dashboard = () => {
-  return <h1> Dashboard to go here</h1>;
+  const dispatch = useDispatch();
+
+  dispatch(getIndexData());
+
+  // const res = await fetch("/api/stocks", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ indexArray }),
+  // });
+
+  return <SP500 />;
+  // return <h1>Hello</h1>;
 };
 
 export default Dashboard;
