@@ -68,6 +68,7 @@ a {
   background-color: whitesmoke;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  width: 350px;
 }
 
 .logout-button-container {
