@@ -2,21 +2,33 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import SearchBar from "../SearchBar";
 
 const Navigation = ({ isLoaded }) => {
   const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
-  } else {
     sessionLinks = (
       <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink className="sign-up-button" to="/signup">
-          Sign Up
-        </NavLink>
+        <div className="search-bar-container">
+          <SearchBar />
+        </div>
+        <ProfileButton user={sessionUser} />
       </>
+    );
+  } else {
+    sessionLinks = (
+      <ul className="unauthed-nav-container">
+        <li>
+          <NavLink to="/login">Log In</NavLink>
+        </li>
+        <li>
+          <NavLink className="sign-up-button" to="/signup">
+            Sign Up
+          </NavLink>
+        </li>
+      </ul>
     );
   }
 
@@ -26,14 +38,7 @@ const Navigation = ({ isLoaded }) => {
         <NavLink to="/" className="main-logo-name">
           Litquidity
         </NavLink>
-        <ul>
-          {/* <li>
-          <NavLink exact to="/">
-            Home
-          </NavLink>
-        </li> */}
-          <li>{isLoaded && sessionLinks}</li>
-        </ul>
+        {isLoaded && sessionLinks}
       </nav>
     </div>
   );

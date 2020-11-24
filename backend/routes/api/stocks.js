@@ -1,7 +1,7 @@
 const express = require("express");
 // const { handleValidationErrors } = require("../../utils/validation");
 const asyncHandler = require("express-async-handler");
-
+const fetch = require("node-fetch");
 const router = express.Router();
 
 // const validateSearch = [
@@ -13,22 +13,25 @@ const router = express.Router();
 //   handleValidationErrors,
 // ];
 
-const baseUrl = "https://sandbox.iexapis.com";
+const baseUrl = "https://sandbox.iexapis.com/stable";
 const apiTestKey = process.env.API_TEST_KEY;
 
+/******************** Stock routes ********************/
+
+//route for users to search for a single stock using search feature
 router.post(
-  "/stocks",
+  "/",
   asyncHandler(async (req, res, next) => {
-    console.log("\n\n\n\n\n\nwe hit this\n\n\n\n\n\n");
-    const { symbolQuery } = req.body.toUpperCase();
-    const stockData = await fetch(
-      `${baseUrl}/stock/${symbolQuery}/quote?token=${apiTestKey}`
-    );
+    const { searchInput: symbolQuery } = req.body;
+    const url = `${baseUrl}/stock/${symbolQuery}/quote?token=${apiTestKey}`;
+
+    const stockData = await fetch(url);
+
+    const stockDataJSON = await stockData.json();
     if (stockData.ok) {
-      console.log("\n\n\n\n\n\nfetch worked!\n\n\n\n\n");
-      res.status(201).json({ stockData });
+      return res.status(201).send({ stockDataJSON });
     } else {
-      console.log("\n\n\n\n\ndid not work\n\n\n\n\n\n");
+      next(stockData.statusText);
     }
   })
 );
