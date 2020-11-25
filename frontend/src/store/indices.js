@@ -5,12 +5,12 @@ const GET_DATA = "indices/get-data";
 export const getData = (indexData) => {
   return {
     type: GET_DATA,
-    indices: indexData,
+    data: indexData,
   };
 };
 
-export const getIndexData = () =>
-  async function (dispatch) {
+export const getIndexData = () => {
+  return async function (dispatch) {
     const indexArray = ["SPY", "QQQ", "DIA"];
     const res = await fetch("/api/stocks", {
       method: "POST",
@@ -20,11 +20,12 @@ export const getIndexData = () =>
     dispatch(getData(res.data));
     return res;
   };
+};
 
-const indicesReducer = (state = { indices: {} }, action) => {
+const indicesReducer = (state = { data: {} }, action) => {
   switch (action.type) {
     case GET_DATA:
-      return { ...state, indices: action.indices };
+      return { ...state, data: action.data };
     default:
       return state;
   }

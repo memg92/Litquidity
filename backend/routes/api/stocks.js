@@ -22,19 +22,19 @@ const apiTestKey = process.env.API_TEST_KEY;
 router.post(
   "/",
   asyncHandler(async (req, res, next) => {
-    const { searchInput: symbolQuery } = req.body;
-    console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
-
+    let symbolQuery;
     let url;
-    if (symbolQuery.length > 5) {
-      let symbolsString = symbolQuery;
-      if (Array.isArray(symbolQuery)) {
-        symbolsString = symbolQuery.join();
-      }
-      url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiTestKey}`;
-    } else {
+    if (req.body.searchInput) {
+      symbolQuery = req.body.searchInput;
       url = `${baseUrl}/${symbolQuery}/quote?token=${apiTestKey}`;
     }
+    if (req.body.indexArray) {
+      symbolQuery = req.body.indexArray;
+      symbolsString = symbolQuery.join();
+      url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiTestKey}`;
+    }
+
+    console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
 
     const stockData = await fetch(url);
 

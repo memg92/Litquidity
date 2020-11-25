@@ -1,20 +1,28 @@
-import { getIndexData } from "../../store/indices";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { getIndexData } from "../../store/indices";
+import DOW from "./DOW";
+import NASDAQ from "./NASDAQ";
 import SP500 from "./SP500";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    dispatch(getIndexData()).then(() => setIsLoaded(true));
+  }, [dispatch]);
 
-  dispatch(getIndexData());
-
-  // const res = await fetch("/api/stocks", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ indexArray }),
-  // });
-
-  return <SP500 />;
-  // return <h1>Hello</h1>;
+  return (
+    <>
+      {isLoaded && (
+        <div className="indices-main-container">
+          <SP500 />
+          <NASDAQ />
+          <DOW />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Dashboard;
