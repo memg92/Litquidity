@@ -6,11 +6,15 @@ const DOW = () => {
 
   const percentChange =
     parseFloat(dowData.quote.changePercent).toFixed(2) + "%";
+  const percentPositive = dowData.quote.changePercent > 0;
+  const percentStyle = percentPositive ? { color: "green" } : { color: "red" };
 
   return (
     <div className="index-main-container">
       <h3>Dow</h3>
-      <div>{percentChange > 0 ? "+" + percentChange : "-" + percentChange}</div>
+      <div style={percentStyle}>
+        {percentPositive ? "+" + percentChange : percentChange}
+      </div>
     </div>
   );
 };

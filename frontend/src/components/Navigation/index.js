@@ -14,6 +14,9 @@ const Navigation = ({ isLoaded }) => {
         <div className="search-bar-container">
           <SearchBar />
         </div>
+        <NavLink className="portfolio-link" to="/portfolio">
+          Portfolio
+        </NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );

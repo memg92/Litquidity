@@ -3,7 +3,7 @@ nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: auto;
-  grid-template-areas: "logo searchbar profileBtn";
+  grid-template-areas: "logo searchbar portfolio profileBtn";
 }
 
 .navbar-container {
@@ -21,11 +21,12 @@ nav {
   font-family: "Capsule Sans Text", sans-serif;
   font-weight: 500;
   font-size: 1.5em;
-  grid-area: "logo";
+  grid-area: logo;
 }
 
 ul {
   list-style: none;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -59,22 +60,29 @@ a {
 .profile-button-container {
   position: relative;
   padding: 0;
-  grid-area: "profileBtn";
+  grid-area: profileBtn;
   justify-self: flex-end;
   align-self: center;
 }
 
 .profile-dropdown {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   position: absolute;
   align-items: flex-start;
-  bottom: -155px;
+  justify-content: space-around;
+  min-height: 125px;
+  top: 15px;
   right: -15px;
   background-color: whitesmoke;
   box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  width: 350px;
+  min-width: 200px;
+}
+
+.profile-dropdown > li:not(.logout-button-container) {
+  padding-left: 15px;
 }
 
 .logout-button-container {
@@ -82,7 +90,7 @@ a {
   align-self: center;
 }
 .search-bar-container {
-  grid-area: "searchbar";
+  grid-area: searchbar;
   justify-self: center;
   align-self: center;
   max-width: 500px;
@@ -106,4 +114,12 @@ a {
 .unauthed-nav-container {
   grid-column-start: 3;
   justify-self: flex-end;
+}
+
+.portfolio-link {
+  grid-area: portfolio;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 15px;
 }

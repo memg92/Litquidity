@@ -6,12 +6,16 @@ const NASDAQ = () => {
 
   const percentChange =
     parseFloat(nasdaqData.quote.changePercent).toFixed(2) + "%";
+  const percentPositive = nasdaqData.quote.changePercent > 0;
+  const percentStyle = percentPositive ? { color: "green" } : { color: "red" };
 
   return (
-    <>
+    <div className="index-main-container">
       <h3>Nasdaq</h3>
-      <div>{percentChange > 0 ? "+" + percentChange : "-" + percentChange}</div>
-    </>
+      <div style={percentStyle}>
+        {percentPositive ? "+" + percentChange : percentChange}
+      </div>
+    </div>
   );
 };
 

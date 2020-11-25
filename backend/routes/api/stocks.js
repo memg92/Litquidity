@@ -12,8 +12,8 @@ const router = express.Router();
 //     .withMessage("Please provide a username with at least 4 characters."),
 //   handleValidationErrors,
 // ];
-
-const baseUrl = "https://sandbox.iexapis.com/stable/stock";
+const keyword = process.env.NODE_ENV === "production" ? "cloud" : "sandbox";
+const baseUrl = `https://${keyword}.iexapis.com/stable/stock`;
 const apiTestKey = process.env.API_TEST_KEY;
 
 /******************** Stock routes ********************/
