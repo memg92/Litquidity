@@ -6,6 +6,7 @@ import SignUpFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation/index";
 import * as sessionActions from "./store/session";
 import HomePageManager from "./components/HomePageManager";
+import PortfoliosPage from "./components/Dashboard/Portfolios";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePageManager isLoaded={isLoaded} />
+          </Route>
+          <Route path="/portfolios">
+            <PortfoliosPage />
           </Route>
           <Route path="/login">
             <LoginFormPage />

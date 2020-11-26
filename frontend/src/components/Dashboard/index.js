@@ -11,6 +11,7 @@ import "./News/News.css";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(getIndexData()).then(() => setIsLoaded(true));
   }, [dispatch]);

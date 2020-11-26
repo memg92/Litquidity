@@ -34,7 +34,7 @@ router.post(
       url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiTestKey}`;
     }
 
-    console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
+    // console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
 
     const stockData = await fetch(url);
 
