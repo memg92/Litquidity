@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { fetch } from "../../store/csrf";
 import "../Dashboard/News/News.css";
 import "./StockDetails.css";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const StockDetails = (props) => {
   const stock = props.location.state.stock;
@@ -46,7 +46,6 @@ const StockDetails = (props) => {
     const quantity = 1;
     const priceAcquired = stock.latestPrice;
     const dateAcquired = new Date();
-    console.log(dateAcquired);
     const res = await fetch("/api/stocks/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -91,7 +90,6 @@ const StockDetails = (props) => {
             <button type="submit">Add Stock</button>
           </form>
         )}
-        {/* {stockCreated && <Redirect to={`/portfolios/${portfolioId}`} />} */}
       </div>
       <StockNews symbol={stock.symbol} />
     </>

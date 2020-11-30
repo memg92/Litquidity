@@ -5,10 +5,8 @@ import { fetch } from "../../../store/csrf";
 const PortfolioViewPage = () => {
   const params = useParams();
   const portfolioId = params.id;
-  console.log("portfolioId", portfolioId);
   const [stocks, setStocks] = useState({});
   const [stocksLoaded, setStocksLoaded] = useState(false);
-  // console.log(symbol);
 
   useEffect(() => {
     const fetchStocks = async () => {
