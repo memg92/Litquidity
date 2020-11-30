@@ -5,7 +5,7 @@ const NASDAQ = () => {
   const nasdaqData = indexData.data.stockDataJSON.QQQ;
 
   const percentChange =
-    parseFloat(nasdaqData.quote.changePercent).toFixed(2) + "%";
+    parseFloat(nasdaqData.quote.changePercent * 100).toFixed(2) + "%";
   const percentPositive = nasdaqData.quote.changePercent > 0;
   const percentStyle = percentPositive ? { color: "green" } : { color: "red" };
 

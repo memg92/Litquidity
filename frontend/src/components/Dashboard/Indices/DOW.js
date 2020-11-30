@@ -5,7 +5,7 @@ const DOW = () => {
   const dowData = indexData.data.stockDataJSON.DIA;
 
   const percentChange =
-    parseFloat(dowData.quote.changePercent).toFixed(2) + "%";
+    parseFloat(dowData.quote.changePercent * 100).toFixed(2) + "%";
   const percentPositive = dowData.quote.changePercent > 0;
   const percentStyle = percentPositive ? { color: "green" } : { color: "red" };
 

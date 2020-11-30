@@ -5,7 +5,7 @@ const SP500 = () => {
   const spyData = indexData.data.stockDataJSON.SPY;
 
   const percentChange =
-    parseFloat(spyData.quote.changePercent).toFixed(2) + "%";
+    parseFloat(spyData.quote.changePercent * 100).toFixed(2) + "%";
   const percentPositive = spyData.quote.changePercent > 0;
   const percentStyle = percentPositive ? { color: "green" } : { color: "red" };
 

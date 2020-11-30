@@ -70,7 +70,7 @@ const StockDetails = (props) => {
         <h2 className="stock-name-symbol">{`${stock.companyName} (${stock.symbol})`}</h2>
         <p className="stock-price">{`$${stock.latestPrice}`}</p>
         <p className="stock-change-details">{`$${stock.change} (${parseFloat(
-          stock.changePercent
+          stock.changePercent * 100
         ).toFixed(2)}%)`}</p>
         <button onClick={openMenu}>Add to portfolio</button>
         {showMenu && (
