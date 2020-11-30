@@ -20,8 +20,10 @@
     "image source"
     "image summary";
   padding: 0 10px;
+  padding-bottom: 15px;
   max-width: 700px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
 .index-news-headline,
@@ -47,6 +49,7 @@
 .index-news-summary,
 .stock-news-summary {
   grid-area: summary;
+  margin: 5px 0;
 }
 .index-news-image,
 .stock-news-image {
