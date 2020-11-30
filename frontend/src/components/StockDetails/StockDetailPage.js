@@ -2,6 +2,7 @@ import StockNews from "../Dashboard/News/Stock";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserPortfolios } from "../../store/portfolios";
 import { useState, useEffect } from "react";
+import { fetch } from "../../store/csrf";
 
 const StockDetails = (props) => {
   const stock = props.location.state.stock;

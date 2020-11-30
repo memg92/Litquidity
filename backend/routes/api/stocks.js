@@ -1,8 +1,8 @@
 const express = require("express");
 // const { handleValidationErrors } = require("../../utils/validation");
+const fetch = require("node-fetch");
 const { Stock } = require("../../db/models");
 const asyncHandler = require("express-async-handler");
-const fetch = require("node-fetch");
 const router = express.Router();
 
 // const validateSearch = [

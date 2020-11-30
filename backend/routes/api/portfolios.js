@@ -1,5 +1,4 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const asyncHandler = require("express-async-handler");
