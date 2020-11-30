@@ -53,5 +53,5 @@
   grid-area: image;
   align-self: center;
   height: auto;
-  width: 150px;
+  max-width: 130px;
 }
