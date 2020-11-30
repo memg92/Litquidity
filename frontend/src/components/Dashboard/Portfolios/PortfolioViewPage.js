@@ -33,22 +33,26 @@ const PortfolioViewPage = () => {
     <>
       {stocksLoaded && (
         <table>
-          <tr>
-            <th>Symbol</th>
-            <th>Quantity</th>
-            <th>Price Acquired</th>
-            <th>Date Acquired</th>
-          </tr>
-          {stocks.map((stock) => {
-            return (
-              <tr>
-                <td>{stock.symbol}</td>
-                <td>{stock.quantity}</td>
-                <td>{`$${stock.priceAcquired}`}</td>
-                <td>{formatDate(stock.dateAcquired)}</td>
-              </tr>
-            );
-          })}
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Quantity</th>
+              <th>Price Acquired</th>
+              <th>Date Acquired</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stocks.map((stock) => {
+              return (
+                <tr key={stock.id}>
+                  <td>{stock.symbol}</td>
+                  <td>{stock.quantity}</td>
+                  <td>{`$${stock.priceAcquired}`}</td>
+                  <td>{formatDate(stock.dateAcquired)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       )}
     </>
