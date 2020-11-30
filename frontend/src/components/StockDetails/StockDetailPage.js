@@ -55,10 +55,10 @@ const StockDetails = (props) => {
     });
 
     if (res.ok) {
-      // console.log(res, "stock was created");
+      console.log(res, "stock was created");
     }
   };
-  // console.log(stock);
+  console.log(stock);
   return (
     <>
       <h1>{`${stock.companyName} (${stock.symbol})`}</h1>
