@@ -1,15 +1,14 @@
 // import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { fetch } from "../../store/csrf";
-import StockDetails from "../StockDetails/StockDetailPage";
+// import StockDetails from "../StockDetails/StockDetailPage";
 
 const SearchBar = () => {
   // const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
   const [stockLoaded, setStockLaoded] = useState(false);
   const [stock, setStock] = useState({});
-  const history = useHistory();
   const handleSearch = async (e) => {
     e.preventDefault();
     const res = await fetch("/api/stocks", {
