@@ -42,7 +42,7 @@ const Portfolio = ({ isLoaded }) => {
 
   const displayPortfolios = ({ portfolios }) => {
     // debugger;
-    console.log(portfolios);
+    // console.log(portfolios);
 
     if (!portfolios) {
       return <h2>Loading...</h2>;

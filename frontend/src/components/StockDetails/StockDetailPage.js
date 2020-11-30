@@ -55,7 +55,7 @@ const StockDetails = (props) => {
     });
 
     if (res.ok) {
-      console.log(res, "stock was created");
+      // console.log(res, "stock was created");
     }
   };
   // console.log(stock);

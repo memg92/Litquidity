@@ -21,7 +21,7 @@ const SearchBar = () => {
     if (res.ok) {
       // const stock = res.data.stockDataJSON;
       setStock(res.data.stockDataJSON);
-      console.log("we hit this", stock);
+      // console.log("we hit this", stock);
       setStockLaoded(true);
     } else {
       console.error("SYMBOL WAS NOT VALID");
