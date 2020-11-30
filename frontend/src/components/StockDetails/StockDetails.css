@@ -1,0 +1,12 @@
+.stock-details-container {
+  max-width: 750px;
+  margin: 10px auto;
+}
+
+.select-portfolio-form {
+  margin-top: 20px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

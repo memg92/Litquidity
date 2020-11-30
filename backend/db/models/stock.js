@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: "CASH",
       },
-      quatity: {
+      quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 50000,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: 50000,
       },
-      dataAcquired: {
+      dateAcquired: {
         type: DataTypes.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         allowNull: false,

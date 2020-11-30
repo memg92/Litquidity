@@ -22,6 +22,19 @@ const apiKey =
 
 /******************** Stock routes ********************/
 
+router.get(
+  "/:id(\\d+)",
+  asyncHandler(async (req, res, next) => {
+    const portfolioId = parseInt(req.params.id, 10);
+
+    const stocks = await Stock.findAll({ where: { portfolioId } });
+    if (stocks) {
+      res.status(201).json({ stocks });
+    } else {
+      next();
+    }
+  })
+);
 //route for users to search for a single stock using search feature
 router.post(
   "/",
@@ -73,7 +86,6 @@ router.post(
 router.post(
   "/create",
   asyncHandler(async (req, res, next) => {
-    console.log("\n\n\n\nwe hit create route\n\n\n\n");
     const {
       symbol,
       quantity,

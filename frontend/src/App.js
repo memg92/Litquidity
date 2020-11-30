@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import HomePageManager from "./components/HomePageManager";
 import PortfoliosPage from "./components/Dashboard/Portfolios";
 import StockDetails from "./components/StockDetails/StockDetailPage";
+import PortfolioViewPage from "./components/Dashboard/Portfolios/PortfolioViewPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
           />
           <Route exact path="/portfolios">
             <PortfoliosPage />
+          </Route>
+          <Route path="/portfolios/:id">
+            <PortfolioViewPage />
           </Route>
           <Route path="/login">
             <LoginFormPage />

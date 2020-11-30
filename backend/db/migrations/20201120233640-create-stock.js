@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         defaultValue: "CASH",
       },
-      quatity: {
+      quantity: {
         allowNull: false,
         type: Sequelize.INTEGER,
         defaultValue: 50000,
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
         defaultValue: 1.0,
       },
-      dataAcquired: {
+      dateAcquired: {
         allowNull: false,
         type: Sequelize.DATE,
       },

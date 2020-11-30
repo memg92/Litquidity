@@ -4,11 +4,14 @@ import { getUserPortfolios } from "../../store/portfolios";
 import { useState, useEffect } from "react";
 import { fetch } from "../../store/csrf";
 import "../Dashboard/News/News.css";
+import "./StockDetails.css";
+import { Redirect, useHistory } from "react-router-dom";
 
 const StockDetails = (props) => {
   const stock = props.location.state.stock;
   const [showMenu, setShowMenu] = useState(false);
-  const [stockCreated, setStockCreated] = useState(false);
+  const history = useHistory();
+  // const [stockCreated, setStockCreated] = useState(false);
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
   const portfolios = useSelector(
@@ -57,35 +60,39 @@ const StockDetails = (props) => {
     });
 
     if (res.ok) {
-      setStockCreated(true);
+      // setStockCreated(true);
+      history.push(`/portfolios/${portfolioId}`);
     }
   };
 
   return (
     <>
-      <h1>{`${stock.companyName} (${stock.symbol})`}</h1>
-      <p>{`$${stock.latestPrice}`}</p>
-      <p>{`$${stock.change} (${parseFloat(stock.changePercent).toFixed(
-        2
-      )}%)`}</p>
-      <button onClick={openMenu}>Add to portfolio</button>
-      {showMenu && (
-        <form className="select-portfolio-form" onSubmit={handleSubmit}>
-          <label>Please select a portfolio</label>
-          <select className="select-portfolio" name="portfolios">
-            {portfolios.map((portfolio) => (
-              <option
-                key={portfolio.id}
-                name={portfolio.id}
-                value={portfolio.id}
-              >
-                {portfolio.title}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Add Stock</button>
-        </form>
-      )}
+      <div className="stock-details-container">
+        <h2 className="stock-name-symbol">{`${stock.companyName} (${stock.symbol})`}</h2>
+        <p className="stock-price">{`$${stock.latestPrice}`}</p>
+        <p className="stock-change-details">{`$${stock.change} (${parseFloat(
+          stock.changePercent
+        ).toFixed(2)}%)`}</p>
+        <button onClick={openMenu}>Add to portfolio</button>
+        {showMenu && (
+          <form className="select-portfolio-form" onSubmit={handleSubmit}>
+            <label>Please select a portfolio</label>
+            <select className="select-portfolio" name="portfolios">
+              {portfolios.map((portfolio) => (
+                <option
+                  key={portfolio.id}
+                  name={portfolio.id}
+                  value={portfolio.id}
+                >
+                  {portfolio.title}
+                </option>
+              ))}
+            </select>
+            <button type="submit">Add Stock</button>
+          </form>
+        )}
+        {/* {stockCreated && <Redirect to={`/portfolios/${portfolioId}`} />} */}
+      </div>
       <StockNews symbol={stock.symbol} />
     </>
   );
