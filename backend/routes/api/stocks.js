@@ -73,6 +73,7 @@ router.post(
 router.post(
   "/create",
   asyncHandler(async (req, res, next) => {
+    console.log("\n\n\n\nwe hit create route\n\n\n\n");
     const {
       symbol,
       quantity,
@@ -88,8 +89,11 @@ router.post(
       dateAcquired,
       portfolioId,
     });
-
-    res.status(201).json({ stock });
+    if (stock) {
+      res.status(201).json({ stock });
+    } else {
+      next();
+    }
   })
 );
 

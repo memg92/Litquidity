@@ -31,7 +31,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Portfolios" },
-        unique: true,
       },
       createdAt: {
         allowNull: false,

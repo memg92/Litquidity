@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserPortfolios } from "../../store/portfolios";
 import { useState, useEffect } from "react";
 import { fetch } from "../../store/csrf";
+import "../Dashboard/News/News.css";
 
 const StockDetails = (props) => {
   const stock = props.location.state.stock;
   const [showMenu, setShowMenu] = useState(false);
+  const [stockCreated, setStockCreated] = useState(false);
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
   const portfolios = useSelector(
@@ -41,7 +43,7 @@ const StockDetails = (props) => {
     const quantity = 1;
     const priceAcquired = stock.latestPrice;
     const dateAcquired = new Date();
-
+    console.log(dateAcquired);
     const res = await fetch("/api/stocks/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,10 +57,10 @@ const StockDetails = (props) => {
     });
 
     if (res.ok) {
-      console.log(res, "stock was created");
+      setStockCreated(true);
     }
   };
-  console.log(stock);
+
   return (
     <>
       <h1>{`${stock.companyName} (${stock.symbol})`}</h1>
@@ -68,18 +70,20 @@ const StockDetails = (props) => {
       )}%)`}</p>
       <button onClick={openMenu}>Add to portfolio</button>
       {showMenu && (
-        <form className="select-portfolio-form">
+        <form className="select-portfolio-form" onSubmit={handleSubmit}>
           <label>Please select a portfolio</label>
           <select className="select-portfolio" name="portfolios">
             {portfolios.map((portfolio) => (
-              <option name={portfolio.id} value={portfolio.id}>
+              <option
+                key={portfolio.id}
+                name={portfolio.id}
+                value={portfolio.id}
+              >
                 {portfolio.title}
               </option>
             ))}
           </select>
-          <button type="submit" onClick={handleSubmit}>
-            Add Stock
-          </button>
+          <button type="submit">Add Stock</button>
         </form>
       )}
       <StockNews symbol={stock.symbol} />

@@ -1,14 +1,17 @@
-.index-news-container {
+.index-news-container,
+.stock-news-container {
   margin: 50px auto;
   max-width: 750px;
 }
 
-.index-news-title {
+.index-news-title,
+.stock-news-title {
   border-bottom: 2px solid black;
   padding-bottom: 4px;
 }
 
-.index-news-container > div {
+.index-news-container > div,
+.stock-news-container > div {
   display: grid;
   grid-template-columns: 135px 1fr;
   grid-auto-rows: auto;
@@ -21,27 +24,32 @@
   margin-bottom: 30px;
 }
 
-.index-news-headline {
+.index-news-headline,
+.stock-news-headline {
   grid-area: headline;
   margin: 8px 0;
   font-size: 20px;
 }
 
-.index-news-source {
+.index-news-source,
+.stock-news-source {
   grid-area: source;
   margin-top: 0;
   font-size: 14px;
 }
 
-.index-news-summary > a {
+.index-news-summary > a,
+.stock-news-summary > a {
   color: slategray;
   text-decoration: underline;
 }
 
-.index-news-summary {
+.index-news-summary,
+.stock-news-summary {
   grid-area: summary;
 }
-.index-news-image {
+.index-news-image,
+.stock-news-image {
   grid-area: image;
   align-self: center;
   height: auto;

@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const Sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Stock extends Model {
     /**
@@ -30,12 +31,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       dataAcquired: {
         type: DataTypes.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         allowNull: false,
       },
       portfolioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true,
         references: { model: "Portfolios" },
       },
     },
