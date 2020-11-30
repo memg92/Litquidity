@@ -11,8 +11,8 @@ const validatePortfolio = [
   check("title")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a valid title.")
-    .isLength({ max: 15 })
-    .withMessage("Please provide a title with less than 16 characters."),
+    .isLength({ max: 50 })
+    .withMessage("Please provide a title with 50 characters or less."),
   handleValidationErrors,
 ];
 
@@ -24,8 +24,8 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const userId = parseInt(req.params.id, 10);
 
-    const portfolios = await Portfolio.findAll({ where: userId });
-
+    const portfolios = await Portfolio.findAll({ where: { userId } });
+    // console.log(userId, portfolios);
     res.json({ portfolios });
   })
 );

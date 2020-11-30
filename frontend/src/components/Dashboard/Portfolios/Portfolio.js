@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserPortfolio } from "../../../store/portfolios";
+import {
+  createUserPortfolio,
+  getUserPortfolios,
+} from "../../../store/portfolios";
 
 const Portfolio = ({ isLoaded }) => {
   const dispatch = useDispatch();
@@ -30,20 +33,32 @@ const Portfolio = ({ isLoaded }) => {
 
   const createPortfolio = async (e) => {
     e.preventDefault();
-
-    return dispatch(createUserPortfolio(userId, portfolioTitle));
+    // debugger;
+    setShowForm(false);
+    return dispatch(createUserPortfolio(userId, portfolioTitle)).then(() =>
+      dispatch(getUserPortfolios(userId))
+    );
   };
 
-  useEffect(() => {});
-  const displayPortfolios = (portfolios) => {
+  const displayPortfolios = ({ portfolios }) => {
+    // debugger;
+    console.log(portfolios);
+
+    if (!portfolios) {
+      return <h2>Loading...</h2>;
+    }
+
     if (portfolios.length) {
       return portfolios.map((portfolio, idx) => {
         return (
-          <div key={portfolio.id} className={`portfolio-${idx}`}>
-            <h2 className="portfolio-title">{portfolio.title}</h2>
+          <div
+            key={portfolio.id}
+            className={`portfolio-container portfolio-${idx}`}
+          >
+            <h3 className="portfolio-title">{portfolio.title}</h3>
             <a
               href={`/portfolios/${portfolio.id}/stocks`}
-              className="portfolio-link"
+              className="portfolio-view-link"
             >
               View Portfolio
             </a>

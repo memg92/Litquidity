@@ -1,5 +1,6 @@
 const express = require("express");
 // const { handleValidationErrors } = require("../../utils/validation");
+const { Stock } = require("../../db/models");
 const asyncHandler = require("express-async-handler");
 const fetch = require("node-fetch");
 const router = express.Router();
@@ -14,7 +15,10 @@ const router = express.Router();
 // ];
 const keyword = process.env.NODE_ENV === "production" ? "cloud" : "sandbox";
 const baseUrl = `https://${keyword}.iexapis.com/stable/stock`;
-const apiTestKey = process.env.API_TEST_KEY;
+const apiKey =
+  process.env.NODE_ENV === "production"
+    ? process.env.API_PROD_KEY
+    : process.env.API_TEST_KEY;
 
 /******************** Stock routes ********************/
 
@@ -26,12 +30,12 @@ router.post(
     let url;
     if (req.body.searchInput) {
       symbolQuery = req.body.searchInput;
-      url = `${baseUrl}/${symbolQuery}/quote?token=${apiTestKey}`;
+      url = `${baseUrl}/${symbolQuery}/quote?token=${apiKey}`;
     }
     if (req.body.indexArray) {
       symbolQuery = req.body.indexArray;
       symbolsString = symbolQuery.join();
-      url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiTestKey}`;
+      url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiKey}`;
     }
 
     // console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
@@ -44,6 +48,48 @@ router.post(
     } else {
       next(stockData.statusText);
     }
+  })
+);
+
+router.post(
+  "/news",
+  asyncHandler(async (req, res, next) => {
+    let symbol = req.body.symbol;
+    let url = `${baseUrl}/${symbol}/news?token=${apiKey}`;
+
+    // console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
+
+    const stockNews = await fetch(url);
+
+    const stockNewsJSON = await stockNews.json();
+    if (stockNews.ok) {
+      return res.status(201).send({ stockNewsJSON });
+    } else {
+      next(stockNews.statusText);
+    }
+  })
+);
+
+router.post(
+  "/create",
+  asyncHandler(async (req, res, next) => {
+    const {
+      symbol,
+      quantity,
+      priceAcquired,
+      dateAcquired,
+      portfolioId,
+    } = req.body;
+
+    const stock = await Stock.create({
+      symbol,
+      quantity,
+      priceAcquired,
+      dateAcquired,
+      portfolioId,
+    });
+
+    res.status(201).json({ stock });
   })
 );
 

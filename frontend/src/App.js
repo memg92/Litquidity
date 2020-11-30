@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation/index";
 import * as sessionActions from "./store/session";
 import HomePageManager from "./components/HomePageManager";
 import PortfoliosPage from "./components/Dashboard/Portfolios";
+import StockDetails from "./components/StockDetails/StockDetailPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,11 @@ function App() {
           <Route exact path="/">
             <HomePageManager isLoaded={isLoaded} />
           </Route>
-          <Route path="/portfolios">
+          <Route
+            path="/stocks/:symbol"
+            render={(props) => <StockDetails {...props} />}
+          />
+          <Route exact path="/portfolios">
             <PortfoliosPage />
           </Route>
           <Route path="/login">
