@@ -22,6 +22,7 @@ const apiKey =
 
 /******************** Stock routes ********************/
 
+//route to load stocks related to a specific portfolio id
 router.get(
   "/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
@@ -35,6 +36,7 @@ router.get(
     }
   })
 );
+
 //route for users to search for a single stock using search feature
 router.post(
   "/",
@@ -51,8 +53,6 @@ router.post(
       url = `${baseUrl}/market/batch?symbols=${symbolsString}&types=quote,news&token=${apiKey}`;
     }
 
-    // console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
-
     const stockData = await fetch(url);
 
     const stockDataJSON = await stockData.json();
@@ -64,25 +64,7 @@ router.post(
   })
 );
 
-router.post(
-  "/news",
-  asyncHandler(async (req, res, next) => {
-    let symbol = req.body.symbol;
-    let url = `${baseUrl}/${symbol}/news?token=${apiKey}`;
-
-    // console.log("\n\n\n\n\n\n", symbolQuery, "\n\n\n\n\n\n");
-
-    const stockNews = await fetch(url);
-
-    const stockNewsJSON = await stockNews.json();
-    if (stockNews.ok) {
-      return res.status(201).send({ stockNewsJSON });
-    } else {
-      next(stockNews.statusText);
-    }
-  })
-);
-
+//route to add stock to a portfolio
 router.post(
   "/create",
   asyncHandler(async (req, res, next) => {
@@ -105,6 +87,54 @@ router.post(
       res.status(201).json({ stock });
     } else {
       next();
+    }
+  })
+);
+
+//route to get a list of stocks based on trend type
+router.get(
+  "/trend",
+  asyncHandler(async (req, res, next) => {
+    let listLimit = "5";
+
+    let mostActiveUrl = `${baseUrl}/market/list/mostactive?listLimit=${listLimit}&token=${apiKey}`;
+
+    let gainersUrl = `${baseUrl}/market/list/gainers?listLimit=${listLimit}&token=${apiKey}`;
+
+    let losersUrl = `${baseUrl}/market/list/losers?listLimit=${listLimit}&token=${apiKey}`;
+
+    const mostActiveStocks = await fetch(mostActiveUrl);
+    const gainersStocks = await fetch(gainersUrl);
+    const losersStocks = await fetch(losersUrl);
+
+    if (mostActiveStocks.ok && gainersStocks.ok && losersStocks.ok) {
+      const mostActiveStocksJSON = await mostActiveStocks.json();
+      const gainersStocksJSON = await gainersStocks.json();
+      const losersStocksJSON = await losersStocks.json();
+
+      return res
+        .status(201)
+        .send({ mostActiveStocksJSON, gainersStocksJSON, losersStocksJSON });
+    } else {
+      next(res.data.errors);
+    }
+  })
+);
+
+//route to get stock-related news
+router.post(
+  "/news",
+  asyncHandler(async (req, res, next) => {
+    let symbol = req.body.symbol;
+    let url = `${baseUrl}/${symbol}/news?token=${apiKey}`;
+
+    const stockNews = await fetch(url);
+
+    const stockNewsJSON = await stockNews.json();
+    if (stockNews.ok) {
+      return res.status(201).send({ stockNewsJSON });
+    } else {
+      next(stockNews.statusText);
     }
   })
 );

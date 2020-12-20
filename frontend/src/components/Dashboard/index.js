@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getIndexData } from "../../store/indices";
+import { getStockData } from "../../store/stocks";
 import DOW from "./Indices/DOW";
 import NASDAQ from "./Indices/NASDAQ";
 import SP500 from "./Indices/SP500";
@@ -13,7 +14,9 @@ const Dashboard = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(getIndexData()).then(() => setIsLoaded(true));
+    dispatch(getIndexData())
+      .then(() => dispatch(getStockData()))
+      .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
