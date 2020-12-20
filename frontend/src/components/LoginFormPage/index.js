@@ -10,16 +10,21 @@ const LoginFormPage = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setErrors([]);
+    let errorsContainer = document.querySelector(".errors-container");
 
     return dispatch(sessionActions.loginUser(email, password)).catch((res) => {
-      if (res.data && res.data.errors) setErrors(res.data.errors);
+      if (res.data && res.data.errors) {
+        if (errorsContainer && errorsContainer.firstChild) {
+          errorsContainer.innerHTML = "";
+        }
+        setErrors(res.data.errors);
+      }
     });
   };
 
@@ -27,7 +32,6 @@ const LoginFormPage = () => {
     e.preventDefault();
     const emailField = document.querySelector(".email-field");
     const passwordField = document.querySelector(".password-field");
-    const form = document.querySelector(".login-form");
     emailField.value = "demo@user.io";
     passwordField.value = "password";
 
@@ -42,6 +46,13 @@ const LoginFormPage = () => {
 
   return (
     <div className="login-form-container">
+      {errors && (
+        <ul className="errors-container">
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+      )}
       <form className="login-form" onSubmit={handleSubmit}>
         <input
           className="email-field"

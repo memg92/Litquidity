@@ -12,18 +12,25 @@ const SignUpFormPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let errorsContainer = document.querySelector(".errors-container");
+
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(
         sessionActions.signUpUser(username, email, password)
       ).catch((res) => {
-        if (res.data && res.data.errors) setErrors(res.data.errors);
+        if (res.data && res.data.errors) {
+          if (errorsContainer && errorsContainer.firstChild) {
+            errorsContainer.innerHTML = "";
+          }
+          setErrors(res.data.errors);
+        }
       });
     }
     return setErrors([
@@ -33,10 +40,14 @@ const SignUpFormPage = () => {
 
   return (
     <div className="signup-form-container">
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      {errors && (
+        <ul className="errors-container">
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
         </ul>
+      )}
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
