@@ -3,12 +3,24 @@
   justify-content: space-around;
   max-width: 800px;
   margin: auto;
+  margin-top: 20px;
+}
+.indices-message {
+  display: flex;
+  margin: 50px auto;
+  max-width: 750px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid black;
+  padding-bottom: 4px;
 }
 
 .index-main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 125px;
+  height: 100px;
+  box-shadow: 1px 3px 4px 0px rgba(0, 0, 0, 0.2);
 }
 .index-main-container > h3 {
   margin-top: 20px;
